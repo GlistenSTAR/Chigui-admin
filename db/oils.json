@@ -1,0 +1,22 @@
+[{
+  "_id": {
+    "$oid": "613097a5444eaf4184267653"
+  },
+  "name": "MOBIL",
+  "price": "21",
+  "referr": "20W-50"
+},{
+  "_id": {
+    "$oid": "613097f5444eaf4184267654"
+  },
+  "name": "MOTUL",
+  "price": "28",
+  "referr": "20w-50"
+},{
+  "_id": {
+    "$oid": "614332b7bcf3b4bf34e4b9e0"
+  },
+  "name": "BELRAY",
+  "referr": "15W-50",
+  "price": "28"
+}]
