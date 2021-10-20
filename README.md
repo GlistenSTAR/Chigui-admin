@@ -9,13 +9,17 @@
 * Minimal design
 * Fully controllable via optional props and callbacks
 
-## Demo
-[Click Here](https://raw.githubusercontent.com/androidneha/mern-admin-panel/master/demo.gif)
+[comment]: <> (## Demo)
 
-<a href="https://github.com/adnroidneha/mern-admin-panel">
-    <img src="https://raw.githubusercontent.com/androidneha/mern-admin-panel/master/demo.gif" alt="MERN-Admin-Panel">
-</a>
-<br>
+[comment]: <> ([Click Here]&#40;https://raw.githubusercontent.com/androidneha/mern-admin-panel/master/demo.gif&#41;)
+
+[comment]: <> (<a href="https://github.com/adnroidneha/mern-admin-panel">)
+
+[comment]: <> (    <img src="https://raw.githubusercontent.com/androidneha/mern-admin-panel/master/demo.gif" alt="MERN-Admin-Panel">)
+
+[comment]: <> (</a>)
+
+[comment]: <> (<br>)
 
 ## Available Script
 To start server and client simultaneously
