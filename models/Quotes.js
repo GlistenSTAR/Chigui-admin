@@ -49,7 +49,7 @@ const QuoteSchema = new Schema({
   }],
   services : [{
     price: {
-      type: Number
+      type: String
     },
     service_name: {
       type:String,

@@ -22,13 +22,13 @@ export default function(state = initialState, action) {
                 oil: [action.payload.data, ...state.oil]
             };
         case OIL_UPDATE:
-            let updatedoilindex = state.oil.findIndex( item => item.id == action.payload.data.id);
+            let updatedoilindex = state.oil.findIndex( item => item.id === action.payload.data.id);
             state.oil[updatedoilindex] = action.payload.data;
             return {
                 oil: state.oil
             };
         case OIL_DELETE:
-            let deletedoilindex = state.oil.findIndex( item => item.id == action.payload.data.id);
+            let deletedoilindex = state.oil.findIndex( item => item.id === action.payload.data.id);
             state.oil.splice(deletedoilindex, 1);
             return {
                 oil: state.oil
