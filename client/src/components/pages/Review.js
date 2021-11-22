@@ -2,7 +2,6 @@ import React, { Component, Fragment } from "react";
 import Navbar from "../partials/Navbar";
 import Sidebar from "../partials/Sidebar";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faList} from "@fortawesome/free-solid-svg-icons/faList";
 import ReactDatatable from '@ashvin27/react-datatable';
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
@@ -14,7 +13,7 @@ import ReviewDeleteModal from "../partials/ReviewModal/ReviewDeleteModal";
 import DetailDataAddModal from "../partials/ReviewModal/DetailDataAddModal";
 import DetailDataUpdateModal from "../partials/ReviewModal/DetailDataUpdateModal";
 import DetailDataDeleteModal from "../partials/ReviewModal/DetailDataDeleteModal";
-import { toast, ToastContainer} from "react-toastify";
+import { ToastContainer} from "react-toastify";
 import $ from 'jquery';
 
 class Review extends Component {
@@ -212,8 +211,8 @@ class Review extends Component {
             .then(res => {
                 this.setState({ records: res.data});
                 let currentRecord = this.state.currentRecord;
-                if(currentRecord.id != '') {
-                   const  matchedIndex = res.data.findIndex(itme => itme.id == currentRecord.id);
+                if(currentRecord.id !== '') {
+                   const  matchedIndex = res.data.findIndex(itme => itme.id === currentRecord.id);
                    if (matchedIndex > -1) {
                     this.setState({
                         currentRecord: res.data[matchedIndex]

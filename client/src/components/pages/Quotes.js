@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, {Component, Fragment} from "react";
 import Navbar from "../partials/Navbar";
 import Sidebar from "../partials/Sidebar";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
@@ -7,12 +7,13 @@ import ReactDatatable from '@ashvin27/react-datatable';
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import axios from "axios";
-import {faPlus} from "@fortawesome/free-solid-svg-icons";
-import { toast, ToastContainer} from "react-toastify";
+import {ToastContainer} from "react-toastify";
 import $ from 'jquery';
+
 import QuoteAddModal from "../partials/QuoteModal/QuoteAddModal";
 import QuoteUpdateModal from "../partials/QuoteModal/QuoteUpdateModal";
 import QuoteDeleteModal from "../partials/QuoteModal/QuoteDeleteModal";
+import QuoteEditPriceModal from '../partials/QuoteModal/QuotePriceEditModal';
 
 class Quotes extends Component {
 
@@ -22,16 +23,16 @@ class Quotes extends Component {
         this.columns = [
             {
                 text: (
-                        <input type="checkbox" className="form-control"/>
-                    )
+                    <input type="checkbox" className="form-control"/>
+                )
                 ,
                 cell: record => {
                     return (
                         <input type="checkbox" className="form-control"/>
                     )
                 },
-                align:'center',
-                width:'40px'
+                align: 'center',
+                width: '40px'
             },
             {
                 key: "name",
@@ -84,7 +85,7 @@ class Quotes extends Component {
             },
             {
                 key: "Motor",
-                text:"Motor",
+                text: "Motor",
                 className: "motor",
                 width: 50,
                 align: "left",
@@ -106,7 +107,7 @@ class Quotes extends Component {
             },
             {
                 key: "service",
-                text:"Servicio",
+                text: "Servicio",
                 className: "service",
                 width: 50,
                 align: "left",
@@ -125,37 +126,36 @@ class Quotes extends Component {
                         </Fragment>
                     )
                 }
-            },  
-            // {
-            //     key: "action",
-            //     text: "Action",
-            //     className: "action",
-            //     width: 100,
-            //     align: "left",
-            //     sortable: false,
-            //     cell: record => {
-            //         return (
-            //             <Fragment>
-                            
-            //                 <button
-            //                     data-toggle="modal"
-            //                     data-target="#update-quote-modal"
-            //                     className="btn btn-primary btn-sm"
-            //                     onClick={() => this.editRecord(record)}
-            //                     style={{marginRight: '5px'}}>
-            //                     <i className="fa fa-edit"></i>
-            //                 </button>
-            //                 <button
-            //                     data-toggle="modal"
-            //                     data-target="#delete-quote-modal"
-            //                     className="btn btn-danger btn-sm"
-            //                     onClick={() => this.deleteRecord(record)}>
-            //                     <i className="fa fa-trash"></i>
-            //                 </button>
-            //             </Fragment>
-            //         );
-            //     }
-            // }
+            },
+            {
+                key: "action",
+                text: "Action",
+                className: "action",
+                width: 100,
+                align: "left",
+                sortable: false,
+                cell: record => {
+                    return (
+                        <Fragment>
+                            <button
+                                data-toggle="modal"
+                                data-target="#update-quote-modal"
+                                className="btn btn-primary btn-sm"
+                                onClick={() => this.editRecord(record)}
+                                style={{marginRight: '5px'}}>
+                                <i className="fa fa-edit"></i>
+                            </button>
+                            <button
+                                data-toggle="modal"
+                                data-target="#delete-quote-modal"
+                                className="btn btn-danger btn-sm"
+                                onClick={() => this.deleteRecord(record)}>
+                                <i className="fa fa-trash"></i>
+                            </button>
+                        </Fragment>
+                    );
+                }
+            }
         ];
         this.columns_motor = [
             {
@@ -201,6 +201,14 @@ class Quotes extends Component {
                 className: "price",
                 align: "left",
                 sortable: true,
+                cell: record => {
+                    return (
+                        <Fragment>
+                            { parseInt(record.price) > 0 ?
+                                record.price : <span style={{color: "red"}}>Fijar Precio</span> }
+                        </Fragment>
+                    );
+                }
             },
             {
                 key: "time",
@@ -208,12 +216,35 @@ class Quotes extends Component {
                 className: "time",
                 align: "left",
                 sortable: true,
-            }, 
+            },
+            {
+                key: "action",
+                text: "Action",
+                className: "action",
+                width: 100,
+                align: "left",
+                sortable: false,
+                cell: record => {
+                    console.log(record)
+                    return (
+                        <Fragment>
+                            <button
+                                data-toggle="modal"
+                                data-target="#eidt-quote-price-modal"
+                                className="btn btn-primary btn-sm"
+                                onClick={() => this.editServiceRecord(record)}
+                                style={{marginRight: '5px'}}>
+                                <i className="fa fa-edit"></i>
+                            </button>
+                        </Fragment>
+                    );
+                }
+            }
         ]
 
         this.config = {
             page_size: 10,
-            length_menu: [ 10, 20, 50 ],
+            length_menu: [10, 20, 50],
             filename: "Quote",
             no_data_text: '¡Datos no encontrados!',
             button: {
@@ -248,9 +279,9 @@ class Quotes extends Component {
                 name: "",
                 email: "",
                 phonenumber: 0,
-                detail:"",
-                date:"",
-                time:"",
+                detail: "",
+                date: "",
+                time: "",
             },
         };
 
@@ -271,25 +302,31 @@ class Quotes extends Component {
         axios
             .post("/api/quote/get")
             .then(res => {
-                this.setState({ records: res.data})
+                this.setState({records: res.data})
             })
             .catch()
     }
-    // editRecord(record) {
-    //     this.setState({ currentRecord: record});
 
-    // }
-    // deleteRecord(record) {
-    //     this.setState({ currentRecord: record});
-    // }
+    editRecord(record) {
+        this.setState({currentRecord: record});
+    }
+
+    deleteRecord(record) {
+        this.setState({currentRecord: record});
+    }
+
     getMotor(record) {
-        this.setState({ currentRecord: record });
+        this.setState({currentRecord: record});
         $('#motor-table').show();
     }
-    
+
     getService(record) {
-        this.setState({ currentRecord: record });
+        this.setState({currentRecord: record});
         $('#service-table').show();
+    }
+
+    editServiceRecord = (record) => {
+        this.setState({currentRecord: record});
     }
 
     pageChange(pageData) {
@@ -301,9 +338,10 @@ class Quotes extends Component {
                 <Navbar/>
                 <div className="d-flex" id="wrapper">
                     <Sidebar/>
-                    <QuoteAddModal />
-                    <QuoteUpdateModal record={this.state.currentRecord} />
+                    <QuoteAddModal/>
+                    <QuoteUpdateModal record={this.state.currentRecord}/>
                     <QuoteDeleteModal record={this.state.currentRecord}/>
+                    <QuoteEditPriceModal record={this.state.currentRecord}/>
                     <div id="page-content-wrapper">
                         <div className="container-fluid">
                             {/* <button className="btn btn-outline-primary float-right mt-3 mr-2" data-toggle="modal" data-target="#add-quote-modal"><FontAwesomeIcon icon={faPlus}/> Agregar cotización</button> */}
@@ -351,7 +389,7 @@ Quotes.propTypes = {
 };
 
 const mapStateToProps = state => ({
-    quote: state.quote,  
+    quote: state.quote,
     records: state.records
 });
 
