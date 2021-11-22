@@ -22,13 +22,13 @@ export default function(state = initialState, action) {
                 electronic: [action.payload.data, ...state.electronic]
             };
         case ELECTRONIC_UPDATE:
-            let updatedelectonicindex = state.electronic.findIndex( item => item.id == action.payload.data.id);
+            let updatedelectonicindex = state.electronic.findIndex( item => item.id === action.payload.data.id);
             state.electronic[updatedelectonicindex] = action.payload.data;
             return {
                 electronic: state.electronic
             };
         case ELECTRONIC_DELETE:
-            let deletedelectronicindex = state.electronic.findIndex( item => item.id == action.payload.data.id);
+            let deletedelectronicindex = state.electronic.findIndex( item => item.id === action.payload.data.id);
             state.electronic.splice(deletedelectronicindex, 1);
             return {
                 electronic: state.electronic

@@ -22,13 +22,13 @@ export default function(state = initialState, action) {
                 battery: [action.payload.data, ...state.battery]
             };
         case BATTERY_UPDATE:
-            let updatedbatteryindex = state.battery.findIndex( item => item.id == action.payload.data.id);
+            let updatedbatteryindex = state.battery.findIndex( item => item.id === action.payload.data.id);
             state.battery[updatedbatteryindex] = action.payload.data;
             return {
                 battery: state.battery
             };
         case BATTERY_DELETE:
-            let deletedbatteryindex = state.battery.findIndex( item => item.id == action.payload.data.id);
+            let deletedbatteryindex = state.battery.findIndex( item => item.id === action.payload.data.id);
             state.battery.splice(deletedbatteryindex, 1);
             return {
                 battery: state.battery
