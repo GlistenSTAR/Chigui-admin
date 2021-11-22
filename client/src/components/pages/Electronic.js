@@ -2,7 +2,6 @@ import React, { Component, Fragment } from "react";
 import Navbar from "../partials/Navbar";
 import Sidebar from "../partials/Sidebar";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faList} from "@fortawesome/free-solid-svg-icons/faList";
 import ReactDatatable from '@ashvin27/react-datatable';
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
@@ -12,7 +11,7 @@ import { getElectronic } from "../../actions/electronicAction";
 import ElectronicAddModal from "../partials/ElectronicModal/ElectronicAddModal";
 import ElectronicUpdateModal from "../partials/ElectronicModal/ElectronicUpdateModal";
 import ElectronicDeleteModal from "../partials/ElectronicModal/ElectronicDeleteModal";
-import { toast, ToastContainer} from "react-toastify";
+import { ToastContainer} from "react-toastify";
 
 class Electronic extends Component {
 
