@@ -2,7 +2,6 @@ import React, { Component, Fragment } from "react";
 import Navbar from "../partials/Navbar";
 import Sidebar from "../partials/Sidebar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faList } from "@fortawesome/free-solid-svg-icons/faList";
 import ReactDatatable from '@ashvin27/react-datatable';
 import PropTypes from "prop-types";
 import { connect } from "react-redux";

@@ -2,13 +2,12 @@ import React, { Component, Fragment } from "react";
 import Navbar from "../partials/Navbar";
 import Sidebar from "../partials/Sidebar";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faList} from "@fortawesome/free-solid-svg-icons/faList";
 import ReactDatatable from '@ashvin27/react-datatable';
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import axios from "axios";
 import {faPlus} from "@fortawesome/free-solid-svg-icons";
-import { toast, ToastContainer} from "react-toastify";
+import { ToastContainer} from "react-toastify";
 import $ from 'jquery';
 import ServiceAddModal from "../partials/ServicesModal/TypeModal/ServiceAddModal";
 import ServiceUpdateModal from "../partials/ServicesModal/TypeModal/ServiceUpdateModal";
@@ -345,24 +344,24 @@ class Services extends Component {
                 let currentservice = this.state.currentservice;
                 let currentdata = this.state.currentdata;
                 let currentsubdata = this.state.currentsubdata;
-                if(currentservice.id != '') {
-                   const  matchedserviceIndex = res.data.findIndex(item => item.id == currentservice.id);
+                if(currentservice.id !== '') {
+                   const  matchedserviceIndex = res.data.findIndex(item => item.id === currentservice.id);
                    if (matchedserviceIndex > -1) {
                     this.setState({
                         currentservice: res.data[matchedserviceIndex]
                     });
                    } else {}
                     
-                    if(currentdata._id != '') {
-                        const matcheddataIndex = res.data[matchedserviceIndex].data.findIndex(item => item._id == currentdata._id);
+                    if(currentdata._id !== '') {
+                        const matcheddataIndex = res.data[matchedserviceIndex].data.findIndex(item => item._id === currentdata._id);
                         if (matcheddataIndex > -1) {
                             this.setState({
                                 currentdata: res.data[matchedserviceIndex].data[matcheddataIndex]
                             });
                         } else {}
                         
-                        if(currentsubdata._id != '') {
-                            const mactchedSubdataIndex = res.data[matchedserviceIndex].data[matcheddataIndex].subdata.findIndex(item=> item._id == currentsubdata._id);
+                        if(currentsubdata._id !== '') {
+                            const mactchedSubdataIndex = res.data[matchedserviceIndex].data[matcheddataIndex].subdata.findIndex(item=> item._id === currentsubdata._id);
                             if ( mactchedSubdataIndex >-1 ) {
                                 this.setState({
                                     currentsubdata: res.data[matchedserviceIndex].data[matcheddataIndex].subdata[mactchedSubdataIndex]
