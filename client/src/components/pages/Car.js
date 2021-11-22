@@ -2,13 +2,12 @@ import React, { Component, Fragment } from "react";
 import Navbar from "../partials/Navbar";
 import Sidebar from "../partials/Sidebar";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faList} from "@fortawesome/free-solid-svg-icons/faList";
 import ReactDatatable from '@ashvin27/react-datatable';
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import axios from "axios";
 import {faPlus} from "@fortawesome/free-solid-svg-icons";
-import { toast, ToastContainer} from "react-toastify";
+import { ToastContainer} from "react-toastify";
 import CarDeleteModal from "../partials/CarModal/MotorModal/CarDeleteModal";
 import CarAddModal from "../partials/CarModal/MotorModal/CarAddModal";
 import CarUpdateModal from "../partials/CarModal/MotorModal/CarUpdateModal";
@@ -103,7 +102,7 @@ class Car extends Component {
                                 data-toggle="modal"
                                 data-target="#delete-car-modal"
                                 className="btn btn-danger btn-sm"
-                                onClick={() => this. deleteCardata(record)}
+                                onClick={() => this.deleteCardata(record)}
                                 >
                                 <i className="fa fa-trash"></i>
                             </button>
@@ -336,8 +335,8 @@ class Car extends Component {
                 let currentcardata = this.state.currentcardata;
                 let currrentmodeldata = this.state.currrentmodeldata;
                 let currentyeardata = this.state.currentyeardata;
-                if(currentcardata.id != '') {
-                   const  matchedcarIndex = res.data.findIndex(item => item.id == currentcardata.id);
+                if(currentcardata.id !== '') {
+                   const  matchedcarIndex = res.data.findIndex(item => item.id === currentcardata.id);
                    if (matchedcarIndex > -1) {
                     this.setState({
                         currentcardata: res.data[matchedcarIndex]
@@ -346,8 +345,8 @@ class Car extends Component {
                     $('#model-table').hide();
                    }
                    
-                    if(currrentmodeldata._id != '') {
-                        const matchedmodelIndex = res.data[matchedcarIndex].model.findIndex(item => item._id == currrentmodeldata._id);
+                    if(currrentmodeldata._id !== '') {
+                        const matchedmodelIndex = res.data[matchedcarIndex].model.findIndex(item => item._id === currrentmodeldata._id);
                         if (matchedmodelIndex > -1) {
                             this.setState({
                                 currrentmodeldata: res.data[matchedcarIndex].model[matchedmodelIndex]
@@ -355,8 +354,8 @@ class Car extends Component {
                         } else {
                             $('#year-table').hide();
                         }
-                        if(currentyeardata._id != '') {
-                            const mactchedyearIndex = res.data[matchedcarIndex].model[matchedmodelIndex].year.findIndex(item=> item._id == currentyeardata._id);
+                        if(currentyeardata._id !== '') {
+                            const mactchedyearIndex = res.data[matchedcarIndex].model[matchedmodelIndex].year.findIndex(item=> item._id === currentyeardata._id);
                             if (mactchedyearIndex > -1 ) {
                                 this.setState({
                                     currentyeardata: res.data[matchedcarIndex].model[matchedmodelIndex].year[mactchedyearIndex]

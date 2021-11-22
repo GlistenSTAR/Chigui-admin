@@ -11,7 +11,7 @@ import { getBattery } from "../../actions/batteryActions"
 import BatteryAddModal from "../partials/BatteryModal/BatteryAddModal";
 import BatteryUpdateModal from "../partials/BatteryModal/BatteryUpdateModal";
 import BatteryDeleteModal from "../partials/BatteryModal/BatteryDeleteModal";
-import { toast, ToastContainer} from "react-toastify";
+import { ToastContainer} from "react-toastify";
 
 class Battery extends Component {
 
