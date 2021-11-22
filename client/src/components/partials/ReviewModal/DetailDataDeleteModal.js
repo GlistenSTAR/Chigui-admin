@@ -4,7 +4,6 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { deleteDetailData } from "../../../actions/reviewAction";
 import { withRouter } from "react-router-dom";
-import { toast } from 'react-toastify';
 import $ from 'jquery';
 
 class DetailDataDeleteModal extends React.Component {
@@ -47,7 +46,6 @@ class DetailDataDeleteModal extends React.Component {
     };
 
     render() {
-        const { errors } = this.state;
         return (
             <div>
                 <div className="modal fade" id="delete-detaildata-modal" data-reset="true">
