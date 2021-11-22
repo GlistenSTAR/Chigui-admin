@@ -20,7 +20,6 @@ class UserDeleteModal extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        console.log("rcj");
         if (nextProps.record) {
             this.setState({
                 id: nextProps.record.id,

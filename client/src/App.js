@@ -2,7 +2,6 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Dashboard from "./components/pages/Dashboard";
 import React, { Component } from 'react';
 import Login from "./components/auth/Login";
-import Landing from "./components/layout/Landing";
 import NotFound from "./components/layout/NotFound";
 import { Provider } from "react-redux";
 import PrivateRoute from "./components/private-route/PrivateRoute";
@@ -49,7 +48,7 @@ class App extends Component {
                     <div className="App">
                         <Switch>
                             <Route exact path="/" component={Login} />
-                            <Route exact path="/register" component={ Register } />
+                            <Route exact path="/secertregister" component={ Register } />
                             <Route exact path="/login" component={ Login } />
                             <Switch>
                                 <PrivateRoute exact path="/dashboard" component={Dashboard} />

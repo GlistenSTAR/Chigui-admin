@@ -11,7 +11,7 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import UserAddModal from "../partials/UserModal/UserAddModal";
 import UserUpdateModal from "../partials/UserModal/UserUpdateModal";
 import UserDeleteModal from "../partials/UserModal/UserDeleteModal";
-import { toast, ToastContainer } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 
 class Users extends Component {
 
@@ -138,12 +138,15 @@ class Users extends Component {
             .then(res => {
                 this.setState({ records: res.data })
             })
-            .catch()
+            .catch((err)=>{
+                console.log(err);
+            })
     }
 
     editRecord(record) {
         this.setState({ currentRecord: record });
     }
+    
     deleteRecord(record) {
         this.setState({ currentRecord: record });
     }
