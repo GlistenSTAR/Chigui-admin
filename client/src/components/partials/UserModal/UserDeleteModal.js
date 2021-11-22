@@ -56,7 +56,7 @@ class UserDeleteModal extends React.Component {
     };
 
     render() {
-        const { errors } = this.state;
+        // const { errors } = this.state;
         return (
             <div>
                 <div className="modal fade" id="delete-user-modal" data-reset="true">
