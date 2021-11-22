@@ -4,7 +4,6 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { updateCar } from "../../../../actions/carAction"
 import { withRouter } from "react-router-dom";
-import { toast } from 'react-toastify';
 import $ from 'jquery';
 
 import 'react-toastify/dist/ReactToastify.css';
@@ -122,7 +121,7 @@ class CarUpdateModal extends React.Component {
                                                 type="file"
 
                                             />
-                                            {Boolean(this.state.mark) ? <img src={this.state.mark} /> : null}
+                                            {Boolean(this.state.mark) ? <img src={this.state.mark} alt="img"/> : null}
                                             <button type="button" className="btn btn-primary" onClick={() => this.imageRef.current.click()}>Select image</button>
                                             <span className="text-danger">{errors.file}</span>
                                         </div>

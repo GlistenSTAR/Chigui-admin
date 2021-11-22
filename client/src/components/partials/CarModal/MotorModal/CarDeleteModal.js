@@ -4,7 +4,6 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { deleteCar } from "../../../../actions/carAction";
 import { withRouter } from "react-router-dom";
-import { toast } from 'react-toastify';
 import $ from 'jquery';
 
 class CarDeleteModal extends React.Component {
@@ -45,7 +44,6 @@ class CarDeleteModal extends React.Component {
     };
 
     render() {
-        const { errors } = this.state;
         return (
             <div>
                 <div className="modal fade" id="delete-car-modal" data-reset="true">
