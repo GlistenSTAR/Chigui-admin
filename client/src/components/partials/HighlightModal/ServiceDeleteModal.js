@@ -4,7 +4,6 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { deleteService } from "../../../actions/highlightAction";
 import { withRouter } from "react-router-dom";
-import { toast } from 'react-toastify';
 import $ from 'jquery';
 
 class ServiceDeleteModal extends React.Component {
@@ -49,7 +48,6 @@ class ServiceDeleteModal extends React.Component {
     };
 
     render() {
-        const { errors } = this.state;
         return (
             <div>
                 <div className="modal fade" id="delete-service-modal" data-reset="true">

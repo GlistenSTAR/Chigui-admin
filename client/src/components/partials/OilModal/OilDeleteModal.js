@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { deleteOil } from "../../../actions/oilAction";
 import { withRouter } from "react-router-dom";
-import { toast } from 'react-toastify';
 import $ from 'jquery';
 
 class OilDeleteModal extends React.Component {
@@ -51,7 +50,6 @@ class OilDeleteModal extends React.Component {
     };
 
     render() {
-        const { errors } = this.state;
         return (
             <div>
                 <div className="modal fade" id="delete-oil-modal" data-reset="true">
