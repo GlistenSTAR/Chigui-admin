@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faBacon, faBatteryHalf, faBolt, faBook, faBorderAll, faCar, faOilCan, faReceipt, faSignOutAlt, faThumbsUp, faUser, faUserAlt, faWrench} from "@fortawesome/free-solid-svg-icons";
+import {faBatteryHalf, faBolt, faBook, faBorderAll, faCar, faOilCan, faReceipt, faSignOutAlt, faThumbsUp, faUserAlt, faWrench} from "@fortawesome/free-solid-svg-icons";
 import {connect} from "react-redux";
 import {logoutUser} from "../../actions/authActions";
 import {Link} from "react-router-dom";
