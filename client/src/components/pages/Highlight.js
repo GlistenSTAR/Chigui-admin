@@ -2,13 +2,12 @@ import React, { Component, Fragment } from "react";
 import Navbar from "../partials/Navbar";
 import Sidebar from "../partials/Sidebar";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faList} from "@fortawesome/free-solid-svg-icons/faList";
 import ReactDatatable from '@ashvin27/react-datatable';
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import axios from "axios";
 import {faPlus} from "@fortawesome/free-solid-svg-icons";
-import { toast, ToastContainer} from "react-toastify";
+import { ToastContainer} from "react-toastify";
 import $ from 'jquery';
 
 import HightlightAddModal from "../partials/HighlightModal/HighlightAddModal"
@@ -218,8 +217,8 @@ class Highlight extends Component {
             .then(res => {
                 this.setState({ records: res.data});
                 let currentRecord = this.state.currentRecord;
-                if(currentRecord.id != '') {
-                   const  matchedIndex = res.data.findIndex(itme => itme.id == currentRecord.id);
+                if(currentRecord.id !== '') {
+                   const  matchedIndex = res.data.findIndex(itme => itme.id === currentRecord.id);
                    if ( matchedIndex > -1) {
                     this.setState({
                         currentRecord: res.data[matchedIndex]
