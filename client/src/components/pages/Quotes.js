@@ -1,8 +1,6 @@
 import React, {Component, Fragment} from "react";
 import Navbar from "../partials/Navbar";
 import Sidebar from "../partials/Sidebar";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faList} from "@fortawesome/free-solid-svg-icons/faList";
 import ReactDatatable from '@ashvin27/react-datatable';
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
@@ -224,8 +222,7 @@ class Quotes extends Component {
                 width: 100,
                 align: "left",
                 sortable: false,
-                cell: record => {
-                    console.log(record)
+                cell: (record) => {
                     return (
                         <Fragment>
                             <button
@@ -283,6 +280,12 @@ class Quotes extends Component {
                 date: "",
                 time: "",
             },
+            currentEditRecord:{
+                id: '',
+                service_name: '',
+                price: 0,
+                time: 0,
+            }
         };
 
         this.getData = this.getData.bind(this);
@@ -302,9 +305,23 @@ class Quotes extends Component {
         axios
             .post("/api/quote/get")
             .then(res => {
-                this.setState({records: res.data})
+                this.setState({records: res.data});
+                let currentRecord = this.state.currentRecord;
+                if(currentRecord.id !== '') {
+                   const  matchedIndex = res.data.findIndex(itme => itme.id === currentRecord.id);
+                   if (matchedIndex > -1) {
+                    this.setState({
+                        currentRecord: res.data[matchedIndex]
+                    }); 
+                } else {
+                    $('#service-table').hide();
+                    }
+                     
+                 }
             })
-            .catch()
+            .catch((err)=>{
+                console.log(err)
+            })
     }
 
     editRecord(record) {
@@ -326,22 +343,29 @@ class Quotes extends Component {
     }
 
     editServiceRecord = (record) => {
-        this.setState({currentRecord: record});
+
+        this.setState({currentEditRecord: record});
+        
     }
 
     pageChange(pageData) {
+    }
+
+    editquote = (data) => {
+        console.log(data);
     }
 
     render() {
         return (
             <div>
                 <Navbar/>
+        <div>{this.state.currentEditRecord.price}</div>
                 <div className="d-flex" id="wrapper">
                     <Sidebar/>
                     <QuoteAddModal/>
                     <QuoteUpdateModal record={this.state.currentRecord}/>
                     <QuoteDeleteModal record={this.state.currentRecord}/>
-                    <QuoteEditPriceModal record={this.state.currentRecord}/>
+                    <QuoteEditPriceModal id={this.state.currentRecord.id} modal_record={this.state.currentEditRecord}/>
                     <div id="page-content-wrapper">
                         <div className="container-fluid">
                             {/* <button className="btn btn-outline-primary float-right mt-3 mr-2" data-toggle="modal" data-target="#add-quote-modal"><FontAwesomeIcon icon={faPlus}/> Agregar cotización</button> */}

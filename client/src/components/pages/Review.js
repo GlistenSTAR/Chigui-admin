@@ -238,9 +238,8 @@ class Review extends Component {
         $('#detaildata').show();
               
     }
-    editDetailData(record) {
+    editDetailData(record) {        
         this.setState({ detailData: record });
-       
     }
     deleteDetailData(record) {
         this.setState({ detailData: record }); 
@@ -253,12 +252,14 @@ class Review extends Component {
         return (
             <div>
                 <Navbar/>
+                <div>{this.state.detailData.description}</div>
                 <div className="d-flex" id="wrapper">
                     <Sidebar/>
                     <ReviewAddModal/>
                     <ReviewUpdateModal record={this.state.currentRecord}/>
                     <ReviewDeleteModal record={this.state.currentRecord}/>
                     <DetailDataAddModal id={this.state.currentRecord.id}/>
+        
                     <DetailDataUpdateModal id={this.state.currentRecord.id} detailData={this.state.detailData}/>
                     <DetailDataDeleteModal id={this.state.currentRecord.id} detailData={this.state.detailData}/>
                     <div id="page-content-wrapper">
