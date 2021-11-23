@@ -12,7 +12,8 @@ const reviewRouter = require('./routes/api/review');
 const oilRouter = require('./routes/api/oil');
 const highlightRouter = require('./routes/api/highlight');
 const quoteRouter = require('./routes/api/quote');
-const servicesRouter = require ('./routes/api/services')
+const servicesRouter = require ('./routes/api/services');
+const freeServicesRouter = require('./routes/api/freeServices')
 
 require('./config/passport')(passport);
 
@@ -46,6 +47,7 @@ app.use ('/api/oil', oilRouter);
 app.use ('/api/highlight', highlightRouter);
 app.use ('/api/quote', quoteRouter);
 app.use ('/api/services', servicesRouter);
+app.use ('/api/freeServices', freeServicesRouter);
 
 app.use(express.static(path.join(__dirname, 'client/build')));
 
