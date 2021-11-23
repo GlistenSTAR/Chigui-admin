@@ -1,19 +1,19 @@
 import React, { Component, Fragment } from "react";
 import Navbar from "../partials/Navbar";
 import Sidebar from "../partials/Sidebar";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ReactDatatable from '@ashvin27/react-datatable';
 import PropTypes from "prop-types";
-import {connect} from "react-redux";
+import { connect } from "react-redux";
 import axios from "axios";
-import {faPlus} from "@fortawesome/free-solid-svg-icons";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import ReviewAddModal from "../partials/ReviewModal/ReviewAddModal";
 import ReviewUpdateModal from "../partials/ReviewModal/ReviewUpdateModal";
 import ReviewDeleteModal from "../partials/ReviewModal/ReviewDeleteModal";
 import DetailDataAddModal from "../partials/ReviewModal/DetailDataAddModal";
 import DetailDataUpdateModal from "../partials/ReviewModal/DetailDataUpdateModal";
 import DetailDataDeleteModal from "../partials/ReviewModal/DetailDataDeleteModal";
-import { ToastContainer} from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import $ from 'jquery';
 
 class Review extends Component {
@@ -24,16 +24,16 @@ class Review extends Component {
         this.columns = [
             {
                 text: (
-                        <input type="checkbox" className="form-control"/>
-                    )
+                    <input type="checkbox" className="form-control" />
+                )
                 ,
                 cell: record => {
                     return (
-                        <input type="checkbox" className="form-control"/>
+                        <input type="checkbox" className="form-control" />
                     )
                 },
-                align:'center',
-                width:'40px'
+                align: 'center',
+                width: '40px'
             },
             {
                 key: "type",
@@ -52,8 +52,8 @@ class Review extends Component {
                         <Fragment>
                             <button className="btn btn-primary btn-sm"
                                 onClick={() => this.getDetailData(record)}
-                                style={{marginRight: '5px'}}>
-                                    Datos detallados
+                                style={{ marginRight: '5px' }}>
+                                Datos detallados
                                 {/* <i className="fa fa-serve"></i> */}
                             </button>
                         </Fragment>
@@ -74,7 +74,7 @@ class Review extends Component {
                                 data-target="#update-review-modal"
                                 className="btn btn-primary btn-sm"
                                 onClick={() => this.editRecord(record)}
-                                style={{marginRight: '5px'}}>
+                                style={{ marginRight: '5px' }}>
                                 <i className="fa fa-edit"></i>
                             </button>
                             <button
@@ -89,7 +89,7 @@ class Review extends Component {
                 }
             }
         ];
-        this.columns_detaildata = [            
+        this.columns_detaildata = [
             {
                 key: "subname",
                 text: "Subnombre",
@@ -113,7 +113,7 @@ class Review extends Component {
                 text: "Precio",
                 className: "price",
                 sortable: true,
-            },            
+            },
             {
                 key: "action",
                 text: "Acción",
@@ -128,7 +128,7 @@ class Review extends Component {
                                 data-target="#update-detaildata-modal"
                                 className="btn btn-primary btn-sm"
                                 onClick={() => this.editDetailData(record)}
-                                style={{marginRight: '5px'}}>
+                                style={{ marginRight: '5px' }}>
                                 <i className="fa fa-edit"></i>
                             </button>
                             <button
@@ -136,7 +136,7 @@ class Review extends Component {
                                 data-target="#delete-detaildata-modal"
                                 className="btn btn-danger btn-sm"
                                 onClick={() => this.deleteDetailData(record)}
-                                >
+                            >
                                 <i className="fa fa-trash"></i>
                             </button>
                         </Fragment>
@@ -147,7 +147,7 @@ class Review extends Component {
 
         this.config = {
             page_size: 10,
-            length_menu: [ 10, 20, 50 ],
+            length_menu: [10, 20, 50],
             filename: "Battery",
             no_data_text: '¡Datos no encontrados!',
             button: {
@@ -171,7 +171,7 @@ class Review extends Component {
             show_pagination: true,
             show_info: true,
         };
-        
+
 
         this.state = {
             records: [],
@@ -187,8 +187,8 @@ class Review extends Component {
                 subname: '',
                 description: '',
                 price: 0,
-                time: 0, 
-             }
+                time: 0,
+            }
         };
 
         this.getData = this.getData.bind(this);
@@ -197,7 +197,7 @@ class Review extends Component {
     componentDidMount() {
         this.getData();
         $('#detaildata').hide();
-        
+
     };
 
     componentWillReceiveProps(nextProps) {
@@ -209,40 +209,40 @@ class Review extends Component {
         axios
             .post("/api/review/get")
             .then(res => {
-                this.setState({ records: res.data});
+                this.setState({ records: res.data });
                 let currentRecord = this.state.currentRecord;
-                if(currentRecord.id !== '') {
-                   const  matchedIndex = res.data.findIndex(itme => itme.id === currentRecord.id);
-                   if (matchedIndex > -1) {
-                    this.setState({
-                        currentRecord: res.data[matchedIndex]
-                    });
-                   } else {
-                       $('#detaildata').hide();
-                   }
-                    
+                if (currentRecord.id !== '') {
+                    const matchedIndex = res.data.findIndex(itme => itme.id === currentRecord.id);
+                    if (matchedIndex > -1) {
+                        this.setState({
+                            currentRecord: res.data[matchedIndex]
+                        });
+                    } else {
+                        $('#detaildata').hide();
+                    }
+
                 }
             })
             .catch();
-        
+
     }
 
     editRecord(record) {
-        this.setState({ currentRecord: record});
+        this.setState({ currentRecord: record });
     }
     deleteRecord(record) {
-        this.setState({ currentRecord: record});
+        this.setState({ currentRecord: record });
     }
     getDetailData(record) {
-        this.setState({ currentRecord: record});
+        this.setState({ currentRecord: record });
         $('#detaildata').show();
-              
+
     }
-    editDetailData(record) {        
+    editDetailData(record) {
         this.setState({ detailData: record });
     }
     deleteDetailData(record) {
-        this.setState({ detailData: record }); 
+        this.setState({ detailData: record });
     }
 
     pageChange(pageData) {
@@ -251,41 +251,41 @@ class Review extends Component {
     render() {
         return (
             <div>
-                <Navbar/>
+                <Navbar />
                 <div>{this.state.detailData.description}</div>
                 <div className="d-flex" id="wrapper">
-                    <Sidebar/>
-                    <ReviewAddModal/>
-                    <ReviewUpdateModal record={this.state.currentRecord}/>
-                    <ReviewDeleteModal record={this.state.currentRecord}/>
-                    <DetailDataAddModal id={this.state.currentRecord.id}/>
-        
-                    <DetailDataUpdateModal id={this.state.currentRecord.id} detailData={this.state.detailData}/>
-                    <DetailDataDeleteModal id={this.state.currentRecord.id} detailData={this.state.detailData}/>
+                    <Sidebar />
+                    <ReviewAddModal />
+                    <ReviewUpdateModal record={this.state.currentRecord} />
+                    <ReviewDeleteModal record={this.state.currentRecord} />
+                    <DetailDataAddModal id={this.state.currentRecord.id} />
+
+                    <DetailDataUpdateModal id={this.state.currentRecord.id} detailData={this.state.detailData} />
+                    <DetailDataDeleteModal id={this.state.currentRecord.id} detailData={this.state.detailData} />
                     <div id="page-content-wrapper">
                         <div className="container-fluid">
-                            <button className="btn btn-outline-primary float-right mt-3 mr-2" data-toggle="modal" data-target="#add-review-modal"><FontAwesomeIcon icon={faPlus}/> Agregar una opinión</button>
+                            <button className="btn btn-outline-primary float-right mt-3 mr-2" data-toggle="modal" data-target="#add-review-modal"><FontAwesomeIcon icon={faPlus} /> Agregar una opinión</button>
                             <h1 className="mt-2 text-primary">Lista de revisión</h1>
                             <ReactDatatable
                                 config={this.config}
                                 records={this.state.records}
                                 columns={this.columns}
                                 onPageChange={this.pageChange.bind(this)}
-                            /> 
+                            />
                         </div>
-                        <hr/>
+                        <hr />
                         <div className="container-fluid" id="detaildata">
-                            <button className="btn btn-outline-primary float-right mt-3 mr-2" data-toggle="modal" data-target="#add-detaildata-modal"><FontAwesomeIcon icon={faPlus}/> Agregar Datos detallados</button>
+                            <button className="btn btn-outline-primary float-right mt-3 mr-2" data-toggle="modal" data-target="#add-detaildata-modal"><FontAwesomeIcon icon={faPlus} /> Agregar Datos detallados</button>
                             <h1 className="mt-2 text-primary">Lista de datos detallados </h1>
                             <ReactDatatable
                                 config={this.config}
                                 records={this.state.currentRecord.data}
                                 columns={this.columns_detaildata}
                                 onPageChange={this.pageChange.bind(this)}
-                            /> 
+                            />
                         </div>
                     </div>
-                    <ToastContainer/>
+                    <ToastContainer />
                 </div>
             </div>
         );

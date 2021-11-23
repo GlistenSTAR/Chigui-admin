@@ -9,6 +9,8 @@ import HighlightReducer from "./highlightReducers";
 import QuoteReducer from "./quoteReducers";
 import CarReducer from "./carReducers";
 import ServiceReducer from "./servicesReducers"
+import FreeServicesReducer from "./freeServicesReducer";
+
 export default combineReducers({
     auth: authReducer,
     errors: errorReducer,
@@ -19,5 +21,6 @@ export default combineReducers({
     highlight: HighlightReducer,
     quote: QuoteReducer,
     car: CarReducer,
-    services: ServiceReducer
+    services: ServiceReducer,
+    freeServices: FreeServicesReducer
 });

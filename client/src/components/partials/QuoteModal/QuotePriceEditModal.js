@@ -1,9 +1,9 @@
 import React from 'react'
 import classnames from "classnames";
 import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import { editquote } from "../../../actions/quoteAction";
-import { withRouter } from "react-router-dom";
+import {connect} from "react-redux";
+import {editquote} from "../../../actions/quoteAction";
+import {withRouter} from "react-router-dom";
 import $ from 'jquery';
 
 import 'react-toastify/dist/ReactToastify.css';
@@ -12,7 +12,7 @@ class QuotePriceEditModal extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            id0 : this.props.id,
+            id0: this.props.id,
             id: this.props.modal_record._id,
             service_name: this.props.modal_record.service_name,
             price: this.props.modal_record.price,
@@ -24,7 +24,7 @@ class QuotePriceEditModal extends React.Component {
     componentWillReceiveProps(nextProps) {
         if (nextProps.modal_record) {
             this.setState({
-                id0 : nextProps.id,
+                id0: nextProps.id,
                 id: nextProps.modal_record._id,
                 service_name: nextProps.modal_record.service_name,
                 price: nextProps.modal_record.price,
@@ -42,13 +42,13 @@ class QuotePriceEditModal extends React.Component {
 
     onChange = e => {
         if (e.target.id === 'service_name') {
-            this.setState({ service_name: e.target.value });
+            this.setState({service_name: e.target.value});
         }
         if (e.target.id === 'price') {
-            this.setState({ price: e.target.value });
+            this.setState({price: e.target.value});
         }
         if (e.target.id === 'time') {
-            this.setState({ time: e.target.value });
+            this.setState({time: e.target.value});
         }
     };
 
@@ -95,7 +95,7 @@ class QuotePriceEditModal extends React.Component {
                                     </div>
                                     <div className="row mt-2">
                                         <div className="col-md-3">
-                                            <label htmlFor="price">	Precio</label>
+                                            <label htmlFor="price"> Precio</label>
                                         </div>
                                         <div className="col-md-9">
                                             <input
@@ -127,7 +127,8 @@ class QuotePriceEditModal extends React.Component {
                                     </div>
                                 </div>
                                 <div className="modal-footer">
-                                    <button type="button" className="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                    <button type="button" className="btn btn-secondary" data-dismiss="modal">Cerrar
+                                    </button>
                                     <button
                                         type="submit"
                                         className="btn btn-primary">
@@ -156,5 +157,5 @@ const mapStateToProps = state => ({
 
 export default connect(
     mapStateToProps,
-    { editquote }
+    {editquote}
 )(withRouter(QuotePriceEditModal));
