@@ -2,7 +2,7 @@ import React from 'react'
 import classnames from "classnames";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { addQuote } from "../../../actions/quoteAction";
+import { editquote } from "../../../actions/quoteAction";
 import { withRouter } from "react-router-dom";
 import $ from 'jquery';
 
@@ -12,21 +12,23 @@ class QuotePriceEditModal extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            id: this.props.record.id,
-            service_name: this.props.record.service_name,
-            price: this.props.record.price,
-            time: this.props.record.time,
+            id0 : this.props.id,
+            id: this.props.modal_record._id,
+            service_name: this.props.modal_record.service_name,
+            price: this.props.modal_record.price,
+            time: this.props.modal_record.time,
             errors: {},
         };
     }
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.record) {
+        if (nextProps.modal_record) {
             this.setState({
-                id: nextProps.record.id,
-                service_name: nextProps.record.service_name,
-                price: nextProps.record.price,
-                time: nextProps.record.time,
+                id0 : nextProps.id,
+                id: nextProps.modal_record._id,
+                service_name: nextProps.modal_record.service_name,
+                price: nextProps.modal_record.price,
+                time: nextProps.modal_record.time,
             })
         }
         if (nextProps.errors) {
@@ -39,34 +41,43 @@ class QuotePriceEditModal extends React.Component {
     }
 
     onChange = e => {
-        this.setState({ [e.target.id]: e.target.value });
+        if (e.target.id === 'service_name') {
+            this.setState({ service_name: e.target.value });
+        }
+        if (e.target.id === 'price') {
+            this.setState({ price: e.target.value });
+        }
+        if (e.target.id === 'time') {
+            this.setState({ time: e.target.value });
+        }
     };
 
-    onQuoteAdd = e => {
+    onQuoteEdit = e => {
 
         e.preventDefault();
         const newQuote = {
+            _id0: this.state.id0,
+            _id: this.state.id,
             service_name: this.state.service_name,
             price: this.state.price,
             time: this.state.time
         };
-        this.props.addQuote(newQuote);
+        this.props.editquote(newQuote);
 
     };
 
     render() {
-        const { errors } = this.state;
         return (
             <div>
-                <div className="modal fade" id="eidt-quote-price-modal" data-reset="true">
+                <div className="modal fade" id="eidt-quote-price-modal">
                     <div className="modal-dialog modal-lg">
                         <div className="modal-content">
                             <div className="modal-header">
                                 <h4 className="modal-title">Agregar cotización</h4>
                                 <button type="button" className="close" data-dismiss="modal">&times;</button>
                             </div>
-                            <div className="modal-body">
-                                <form noValidate onSubmit={this.onQuoteAdd} id="add-quote">
+                            <form noValidate onSubmit={this.onQuoteEdit.bind(this)} id="add-quote">
+                                <div className="modal-body">
                                     <div className="row mt-2">
                                         <div className="col-md-3">
                                             <label htmlFor="service_name">ServiceName</label>
@@ -77,11 +88,9 @@ class QuotePriceEditModal extends React.Component {
                                                 value={this.state.service_name}
                                                 id="service_name"
                                                 type="text"
-                                                error={errors.service_name}
                                                 className={classnames("form-control", {
-                                                    invalid: errors.service_name
+                                                    // invalid: errors.service_name
                                                 })}/>
-                                            <span className="text-danger">{errors.service_name}</span>
                                         </div>
                                     </div>
                                     <div className="row mt-2">
@@ -92,14 +101,12 @@ class QuotePriceEditModal extends React.Component {
                                             <input
                                                 onChange={this.onChange}
                                                 value={this.state.price}
-                                                error={errors.price}
                                                 id="price"
-                                                type="email"
+                                                type="text"
                                                 className={classnames("form-control", {
-                                                    invalid: errors.price
+                                                    // invalid: errors.price
                                                 })}
                                             />
-                                            <span className="text-danger">{errors.price}</span>
                                         </div>
                                     </div>
                                     <div className="row mt-2">
@@ -110,27 +117,24 @@ class QuotePriceEditModal extends React.Component {
                                             <input
                                                 onChange={this.onChange}
                                                 value={this.state.time}
-                                                error={errors.time}
                                                 id="time"
-                                                type="tel"
+                                                type="number"
                                                 className={classnames("form-control", {
-                                                    invalid: errors.time
+                                                    // invalid: errors.time
                                                 })}
                                             />
-                                            <span className="text-danger">{errors.time}</span>
                                         </div>
                                     </div>
-                                </form>
-                            </div>
-                            <div className="modal-footer">
-                                <button type="button" className="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                                <button
-                                    form="add-quote"
-                                    type="submit"
-                                    className="btn btn-primary">
-                                    Agregar cotización
-                                </button>
-                            </div>
+                                </div>
+                                <div className="modal-footer">
+                                    <button type="button" className="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                    <button
+                                        type="submit"
+                                        className="btn btn-primary">
+                                        Agregar cotización
+                                    </button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -140,17 +144,17 @@ class QuotePriceEditModal extends React.Component {
 }
 
 QuotePriceEditModal.propTypes = {
-    addQuote: PropTypes.func.isRequired,
-    // auth: PropTypes.object.isRequired,
-    errors: PropTypes.object.isRequired
+    onQuoteEdit: PropTypes.func.isRequired,
+    editquote: PropTypes.func.isRequired,
+    errors: PropTypes.object.isRequired.modal_record,
 };
 
 const mapStateToProps = state => ({
     quote: state.quote,
-    errors: state.errors
+    errors: state.errors,
 });
 
 export default connect(
     mapStateToProps,
-    { addQuote }
+    { editquote }
 )(withRouter(QuotePriceEditModal));
