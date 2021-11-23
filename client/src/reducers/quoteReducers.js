@@ -3,6 +3,7 @@ import {
     QUOTE_ADD,
     QUOTE_DELETE,
     QUOTE_UPDATE,
+    QUOTE_EDIT,
 } from "../actions/types";
 
 const initialState = {
@@ -15,19 +16,23 @@ export default function (state = initialState, action) {
     switch (action.type) {
         case QUOTE_GET:
             return {
-                highlight: action.payload
+                quote: action.payload
             };
         case QUOTE_ADD:
             return {
-                highlight: action.payload
+                quote: action.payload
             };
         case QUOTE_UPDATE:
             return {
-                highlight: action.payload
+                quote: action.payload
             };
         case QUOTE_DELETE:
             return {
-                highlight: action.payload
+                quote: action.payload
+            };
+        case QUOTE_EDIT:
+            return {
+                quote: action.payload
             };
         default:
             return state;
