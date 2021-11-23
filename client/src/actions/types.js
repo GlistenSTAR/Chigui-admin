@@ -43,6 +43,7 @@ export const QUOTE_GET = "QUOTE_GET";
 export const QUOTE_ADD = "QUOTE_ADD";
 export const QUOTE_UPDATE = "QUOTE_UPDATE";
 export const QUOTE_DELETE = "QUOTE_DELETE";
+export const QUOTE_EDIT = "QUOTE_EDIT";
 
 export const CAR_GET = "CAR_GET";
 export const CAR_ADD = "CAR_ADD";

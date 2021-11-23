@@ -4,6 +4,7 @@ import {
     QUOTE_ADD,
     QUOTE_UPDATE,
     QUOTE_DELETE,
+    QUOTE_EDIT,
 } from "./types";
 
 export const addQuote = (data) => dispatch => {
@@ -54,4 +55,21 @@ export const deleteQuote = (userData) => dispatch => {
             payload: err.response.data
            })
            );
+};
+
+export const editquote = (userData) => dispatch => { 
+    console.log("rjc",userData); 
+    axios
+        .post("/api/quote/service/update", userData)
+        .then(res =>
+            dispatch({
+                type: QUOTE_EDIT,
+                payload: res,
+            })
+        ).catch(err =>
+        dispatch({
+            type: GET_ERRORS,
+            payload: err.response.data
+        })
+    );
 };
