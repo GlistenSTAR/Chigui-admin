@@ -8,7 +8,7 @@ import {
 } from "./types";
 
 export const addQuote = (data) => dispatch => {
-    
+
     axios
         .post("/api/quote/add", data)
         .then(res =>
@@ -17,15 +17,15 @@ export const addQuote = (data) => dispatch => {
                 payload: res,
             })
         ).catch(err =>
-        dispatch({
-            type: GET_ERRORS,
-            payload: err.response.data
-        })
-    );
+            dispatch({
+                type: GET_ERRORS,
+                payload: err.response.data
+            })
+        );
 };
 
 export const updateQuote = (userData) => dispatch => {
-    
+
     axios
         .post("/api/quote/update", userData)
         .then(res =>
@@ -34,31 +34,31 @@ export const updateQuote = (userData) => dispatch => {
                 payload: res,
             })
         ).catch(err =>
-        dispatch({
-            type: GET_ERRORS,
-            payload: err.response.data
-        })
-    );
+            dispatch({
+                type: GET_ERRORS,
+                payload: err.response.data
+            })
+        );
 };
 
 export const deleteQuote = (userData) => dispatch => {
     axios
         .post("/api/quote/delete", userData)
-        .then(res => 
+        .then(res =>
             dispatch({
-                type:QUOTE_DELETE,
-                payload: res,   
+                type: QUOTE_DELETE,
+                payload: res,
             })
         ).catch(err =>
-           dispatch({
-            type: GET_ERRORS,
-            payload: err.response.data
-           })
-           );
+            dispatch({
+                type: GET_ERRORS,
+                payload: err.response.data
+            })
+        );
 };
 
-export const editquote = (userData) => dispatch => { 
-    console.log("rjc",userData); 
+export const editquote = (userData) => dispatch => {
+    console.log("rjc", userData);
     axios
         .post("/api/quote/service/update", userData)
         .then(res =>
@@ -67,9 +67,9 @@ export const editquote = (userData) => dispatch => {
                 payload: res,
             })
         ).catch(err =>
-        dispatch({
-            type: GET_ERRORS,
-            payload: err.response.data
-        })
-    );
+            dispatch({
+                type: GET_ERRORS,
+                payload: err.response.data
+            })
+        );
 };

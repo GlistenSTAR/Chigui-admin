@@ -1,11 +1,11 @@
-import React, {Component, Fragment} from "react";
+import React, { Component, Fragment } from "react";
 import Navbar from "../partials/Navbar";
 import Sidebar from "../partials/Sidebar";
 import ReactDatatable from '@ashvin27/react-datatable';
 import PropTypes from "prop-types";
-import {connect} from "react-redux";
+import { connect } from "react-redux";
 import axios from "axios";
-import {ToastContainer} from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import $ from 'jquery';
 
 import QuoteAddModal from "../partials/QuoteModal/QuoteAddModal";
@@ -21,12 +21,12 @@ class Quotes extends Component {
         this.columns = [
             {
                 text: (
-                    <input type="checkbox" className="form-control"/>
+                    <input type="checkbox" className="form-control" />
                 )
                 ,
                 cell: record => {
                     return (
-                        <input type="checkbox" className="form-control"/>
+                        <input type="checkbox" className="form-control" />
                     )
                 },
                 align: 'center',
@@ -96,7 +96,7 @@ class Quotes extends Component {
                                 // data-target="#motor-review-data-modal"
                                 className="btn btn-primary btn-sm"
                                 onClick={() => this.getMotor(record)}
-                                style={{marginRight: '5px'}}>
+                                style={{ marginRight: '5px' }}>
                                 <i className="fa fa-motorcycle"></i>
                             </button>
                         </Fragment>
@@ -118,7 +118,7 @@ class Quotes extends Component {
                                 // data-target="#motor-review-data-modal"
                                 className="btn btn-primary btn-sm"
                                 onClick={() => this.getService(record)}
-                                style={{marginRight: '5px'}}>
+                                style={{ marginRight: '5px' }}>
                                 <i className="fa fa-wrench"></i>
                             </button>
                         </Fragment>
@@ -140,7 +140,7 @@ class Quotes extends Component {
                                 data-target="#update-quote-modal"
                                 className="btn btn-primary btn-sm"
                                 onClick={() => this.editRecord(record)}
-                                style={{marginRight: '5px'}}>
+                                style={{ marginRight: '5px' }}>
                                 <i className="fa fa-edit"></i>
                             </button>
                             <button
@@ -203,7 +203,7 @@ class Quotes extends Component {
                     return (
                         <Fragment>
                             { parseInt(record.price) > 0 ?
-                                record.price : <span style={{color: "red"}}>Fijar Precio</span> }
+                                record.price : <span style={{ color: "red" }}>Fijar Precio</span>}
                         </Fragment>
                     );
                 }
@@ -230,7 +230,7 @@ class Quotes extends Component {
                                 data-target="#eidt-quote-price-modal"
                                 className="btn btn-primary btn-sm"
                                 onClick={() => this.editServiceRecord(record)}
-                                style={{marginRight: '5px'}}>
+                                style={{ marginRight: '5px' }}>
                                 <i className="fa fa-edit"></i>
                             </button>
                         </Fragment>
@@ -280,7 +280,7 @@ class Quotes extends Component {
                 date: "",
                 time: "",
             },
-            currentEditRecord:{
+            currentEditRecord: {
                 id: '',
                 service_name: '',
                 price: 0,
@@ -305,47 +305,47 @@ class Quotes extends Component {
         axios
             .post("/api/quote/get")
             .then(res => {
-                this.setState({records: res.data});
+                this.setState({ records: res.data });
                 let currentRecord = this.state.currentRecord;
-                if(currentRecord.id !== '') {
-                   const  matchedIndex = res.data.findIndex(itme => itme.id === currentRecord.id);
-                   if (matchedIndex > -1) {
-                    this.setState({
-                        currentRecord: res.data[matchedIndex]
-                    }); 
-                } else {
-                    $('#service-table').hide();
+                if (currentRecord.id !== '') {
+                    const matchedIndex = res.data.findIndex(itme => itme.id === currentRecord.id);
+                    if (matchedIndex > -1) {
+                        this.setState({
+                            currentRecord: res.data[matchedIndex]
+                        });
+                    } else {
+                        $('#service-table').hide();
                     }
-                     
-                 }
+
+                }
             })
-            .catch((err)=>{
+            .catch((err) => {
                 console.log(err)
             })
     }
 
     editRecord(record) {
-        this.setState({currentRecord: record});
+        this.setState({ currentRecord: record });
     }
 
     deleteRecord(record) {
-        this.setState({currentRecord: record});
+        this.setState({ currentRecord: record });
     }
 
     getMotor(record) {
-        this.setState({currentRecord: record});
+        this.setState({ currentRecord: record });
         $('#motor-table').show();
     }
 
     getService(record) {
-        this.setState({currentRecord: record});
+        this.setState({ currentRecord: record });
         $('#service-table').show();
     }
 
     editServiceRecord = (record) => {
 
-        this.setState({currentEditRecord: record});
-        
+        this.setState({ currentEditRecord: record });
+
     }
 
     pageChange(pageData) {
@@ -358,14 +358,14 @@ class Quotes extends Component {
     render() {
         return (
             <div>
-                <Navbar/>
-        <div>{this.state.currentEditRecord.price}</div>
+                <Navbar />
+                <div>{this.state.currentEditRecord.price}</div>
                 <div className="d-flex" id="wrapper">
-                    <Sidebar/>
-                    <QuoteAddModal/>
-                    <QuoteUpdateModal record={this.state.currentRecord}/>
-                    <QuoteDeleteModal record={this.state.currentRecord}/>
-                    <QuoteEditPriceModal id={this.state.currentRecord.id} modal_record={this.state.currentEditRecord}/>
+                    <Sidebar />
+                    <QuoteAddModal />
+                    <QuoteUpdateModal record={this.state.currentRecord} />
+                    <QuoteDeleteModal record={this.state.currentRecord} />
+                    <QuoteEditPriceModal id={this.state.currentRecord.id} modal_record={this.state.currentEditRecord} />
                     <div id="page-content-wrapper">
                         <div className="container-fluid">
                             {/* <button className="btn btn-outline-primary float-right mt-3 mr-2" data-toggle="modal" data-target="#add-quote-modal"><FontAwesomeIcon icon={faPlus}/> Agregar cotización</button> */}
@@ -377,7 +377,7 @@ class Quotes extends Component {
                                 onPageChange={this.pageChange.bind(this)}
                             />
                         </div>
-                        <hr/>
+                        <hr />
                         <div className="container-fluid" id="motor-table">
                             {/* <button className="btn btn-outline-primary float-right mt-3 mr-2" data-toggle="modal" data-target="#add-quote-modal"><FontAwesomeIcon icon={faPlus}/> Add Motor</button> */}
                             <h1 className="mt-2 text-primary">Lista de motores</h1>
@@ -388,7 +388,7 @@ class Quotes extends Component {
                                 onPageChange={this.pageChange.bind(this)}
                             />
                         </div>
-                        <hr/>
+                        <hr />
                         <div className="container-fluid" id="service-table">
                             {/* <button className="btn btn-outline-primary float-right mt-3 mr-2" data-toggle="modal" data-target="#add-quote-modal"><FontAwesomeIcon icon={faPlus}/> Add Service</button> */}
                             <h1 className="mt-2 text-primary">Lista de servicios</h1>
@@ -400,7 +400,7 @@ class Quotes extends Component {
                             />
                         </div>
                     </div>
-                    <ToastContainer/>
+                    <ToastContainer />
                 </div>
             </div>
         );
