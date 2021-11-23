@@ -18,7 +18,7 @@ import {
 
 export const getCar = () => dispatch => {
     axios
-        .post("http://localhost:5000/api/car/gets")
+        .post("/api/car/gets")
         .then(res =>
             dispatch({
                 type: CAR_GET,

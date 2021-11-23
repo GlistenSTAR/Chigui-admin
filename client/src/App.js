@@ -1,15 +1,15 @@
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import Dashboard from "./components/pages/Dashboard";
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import Login from "./components/auth/Login";
 import NotFound from "./components/layout/NotFound";
-import { Provider } from "react-redux";
+import {Provider} from "react-redux";
 import PrivateRoute from "./components/private-route/PrivateRoute";
 import Register from "./components/auth/Register";
 import store from "./store";
 import jwt_decode from "jwt-decode";
 import setAuthToken from "./utils/setAuthToken";
-import { setCurrentUser, logoutUser } from "./actions/authActions";
+import {setCurrentUser, logoutUser} from "./actions/authActions";
 
 import './App.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.css';
@@ -27,6 +27,7 @@ import Oil from "./components/pages/Oil";
 import Highlight from "./components/pages/Highlight";
 import Quotes from "./components/pages/Quotes";
 import Services from "./components/pages/Services";
+import FreeServices from './components/pages/FreeServices'
 
 if (localStorage.jwtToken) {
     const token = localStorage.jwtToken;
@@ -41,28 +42,29 @@ if (localStorage.jwtToken) {
 }
 
 class App extends Component {
-    render () {
+    render() {
         return (
             <Provider store={store}>
                 <Router>
                     <div className="App">
                         <Switch>
-                            <Route exact path="/" component={Login} />
-                            <Route exact path="/secertregister" component={ Register } />
-                            <Route exact path="/login" component={ Login } />
+                            <Route exact path="/" component={Login}/>
+                            <Route exact path="/secertregister" component={Register}/>
+                            <Route exact path="/login" component={Login}/>
                             <Switch>
-                                <PrivateRoute exact path="/dashboard" component={Dashboard} />
-                                <PrivateRoute exact path="/users" component={User} />
-                                <PrivateRoute exact path="/battery" component={Battery} />
-                                <PrivateRoute exact path="/electronic" component={Electronic} />
-                                <PrivateRoute exact path="/car" component={Car} />
+                                <PrivateRoute exact path="/dashboard" component={Dashboard}/>
+                                <PrivateRoute exact path="/users" component={User}/>
+                                <PrivateRoute exact path="/battery" component={Battery}/>
+                                <PrivateRoute exact path="/electronic" component={Electronic}/>
+                                <PrivateRoute exact path="/car" component={Car}/>
                                 <PrivateRoute exact path="/review" component={Review}/>
                                 <PrivateRoute exact path="/oil" component={Oil}/>
                                 <PrivateRoute exact path="/highlight" component={Highlight}/>
                                 <PrivateRoute exact path="/quote" component={Quotes}/>
                                 <PrivateRoute exact path="/services" component={Services}/>
+                                <PrivateRoute exact path="/free_services" component={FreeServices}/>
                             </Switch>
-                            <Route exact path="*" component={NotFound} />
+                            <Route exact path="*" component={NotFound}/>
                         </Switch>
                     </div>
                 </Router>
